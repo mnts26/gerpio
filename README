@@ -1,0 +1,4 @@
+This Django App will support the creation of PDF invoices. Customer
+information get provided by a custom model. Invoices can be created
+and administrated in the admin interface and be sent to the customer
+on demand or automatically (e.g. by using cronjobs).
