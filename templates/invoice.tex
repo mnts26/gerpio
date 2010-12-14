@@ -1,0 +1,77 @@
+\documentclass[10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{eurosym}
+\usepackage{longtable}
+\usepackage[automark]{scrpage2}
+\usepackage{helvet}
+\usepackage{color}
+
+\geometry{a4paper, top=40mm, left=10mm, right=10mm, bottom=40mm, headsep=30mm, footskip=0mm}
+\renewcommand{\familydefault}{\sfdefault}
+\definecolor{footercolor}{rgb}{0.3,0.3,0.3} 
+
+\setlength{\tabcolsep}{2mm}
+
+%%%%%%%%%%%%%%%%%%%%% <header and footer> %%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{scrheadings}
+\setkomafont{pagefoot}{\footnotesize} 
+
+\lohead{\includegraphics[scale=0.75]{logo}}
+\cofoot
+{
+	\textcolor{footercolor}
+	{
+		\begin{tabular}{p{70mm}p{80mm}p{70mm}}
+			\textbf{Owner}		& \textbf{Phone:} {{me.phone}} 		& \textbf{Bankverbindung}\\
+			{{me.name}}			& \textbf{Email:} {{me.email}}		& {{me.bank_name}} \\
+			{{me.street}}		& 									& Account: {{me.account_number}} \\
+			{{me.town}}			&									& Bank Code: {{me.bank_code}} \\
+		\end{tabular}
+		\pagemark
+	}
+}
+
+%%% footer line %%%
+\setfootsepline{.1pt} % bottom
+
+%%%%%%%%%%%%%%%%%%%%% </header and footer> %%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+	
+	\begin{tabular}{p{300pt}ll}
+		{{customer.name}}		& {{me.name}}		& \\
+		{{customer.street}}		& {{me.street}}		& \\
+		{{customer.town}} 		& {{me.town}}		& \\
+								&					& \\
+								& Tax number:		& {{me.tax_number}} \\
+								& Invoice number:	& {{invoice_number}} \\
+								& Date:				& {{date}} \\
+	\end{tabular}\\\\\\
+	\renewcommand{\arraystretch}{2}
+
+	\begin{tabular}{p{355pt}r}
+		{\Large{\textbf{Invoice}}} & {\scriptsize{MwSt.-befreit gem. \S19 Abs. 1 UStG}}\\
+		\hline \hline
+	\end{tabular}\\\\
+	
+	\begin{longtable}{p{50pt}|p{270pt}|r|r}
+		\textbf{Qty} & \textbf{Description} & \textbf{Price (\euro{})} & \textbf{Total (\euro{})}\\
+		\endhead
+		\hline
+		{% for position in positions %}
+		 	{{position.qty}}& \textbf{{{position.description}}}	& {{position.price}} & {{position.total}} \\
+		\hline
+		{% endfor%}
+		\hline
+		% total
+		& & & \textbf{{{total}}}
+	\end{longtable}
+	
+	\renewcommand{\arraystretch}{1.3}
+	
+\end{document}
